@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Table Example with Blue Header</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 自定義 CSS -->
+    <style>
+        .thead-blue {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Bootstrap 美化表格示例</h2>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-blue">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">姓名</th>
+                <th scope="col">年齡</th>
+                <th scope="col">城市</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>John Doe</td>
+                <td>28</td>
+                <td>New York</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Jane Smith</td>
+                <td>34</td>
+                <td>Los Angeles</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Sam Johnson</td>
+                <td>23</td>
+                <td>Chicago</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 引入 Bootstrap JavaScript 和相關的依賴 -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
