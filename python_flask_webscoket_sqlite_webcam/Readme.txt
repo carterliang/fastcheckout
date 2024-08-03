@@ -1,7 +1,5 @@
-Websocket Chatroom
- Joseph Nov 14,2022
-=========
 
+=========
 [Installation]
 pip install -r requirements.txt
 
@@ -14,15 +12,18 @@ tree /F
 │─sqllite_utils.py
 ├─Readme.txt
 ├─requirements.txt
-│
+│─ post.py
 ├─templates/
-│      html5_camera_3.html
+│      html5_camera_1_1.html
+│      html5_camera_2.html
 │      index.html
-│      viewreport.html
+│      viewreport02.html
 │
 └─upload/
-        20221114-190224.png
-        20221114-190431.png
+│        20221114-190224.png
+└─web/index.html
+
+        
 
 
 [Run Flask]
@@ -31,7 +32,7 @@ python appmain.py
 
 [Test it]
 
-
+http://127.0.0.1:3000
 
 #main function
 
@@ -40,7 +41,6 @@ http://127.0.0.1:3000
 #send a camera image (base64)
 
 http://127.0.0.1:3000/video
-
 
 
 #Referencs docs
