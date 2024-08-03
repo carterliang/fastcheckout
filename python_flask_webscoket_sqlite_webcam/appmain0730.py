@@ -38,10 +38,6 @@ def index():
 @app.route('/video')
 def goto_video():
     return render_template('html5_camera_1_1.html')
-
-@app.route('/video2')
-def goto_video2():
-    return render_template('html5_camera_2.html')
     
 @app.route('/item')
 def get_item():
@@ -171,15 +167,9 @@ def trigger_allitem_item(msg):
 def  trigger_new_item(msg):
      print('trigger new_item')
      newitems=[{ 'p_id': 2, 'p_name': '杏仁巧克力酥片', 'p_price': 50}]
-     emit('new_item_event', {'data': json.dumps(newitems) }, broadcast=True)
+     emit('new_item_event', {'data': json.dumps(newitems) }, broadcast=False)
 
-@socketio.on('new_item_from_pos')
-def form_pos(classid):
-    pos_item = [{'p_id': class_product_tbl[int(classid)]['p_id'],
-                 'p_name': class_product_tbl[int(classid)]['p_name'],
-                 'p_price': class_product_tbl[int(classid)]['p_price']}]
-    
-    emit('new_item_event', {'data': json.dumps(pos_item) }, broadcast=True)
+
 
 #carter add
 # 接收前端皆漲的資料F
@@ -258,7 +248,7 @@ def handle_search(data):
             ORDER_D D ON M.o_id = D.o_id
         WHERE
             M.o_date BETWEEN ? AND ?
-        GROUP BY M.o_id, M.o_date, M.o_total order by M.o_date desc,M.o_id desc
+        GROUP BY M.o_id, M.o_date, M.o_total
     '''
     try:
         df = pd.read_sql_query(query, conn, params=(start_date, end_date))
@@ -269,7 +259,7 @@ def handle_search(data):
             emit('search_results', {'results': []})
         else:
             orders = df.to_dict('records')
-            emit('search_results', {'results': orders}, broadcast=True)
+            emit('search_results', {'results': orders})
     except Exception as e:
         print(f"Error executing query: {e}")
         emit('search_results', {'results': f"Error executing query: {e}"})
@@ -285,7 +275,7 @@ def handle_order_details(data):
         SELECT p_id, p_name, p_price, SUM(p_qty) as total_qty
         FROM ORDER_D
         WHERE o_id = ?
-        GROUP BY p_id, p_name, p_price 
+        GROUP BY p_id, p_name, p_price
     '''
     try:
         df = pd.read_sql_query(query, conn, params=(o_id,))
@@ -303,7 +293,7 @@ def handle_order_details(data):
             details_html = df.to_html(index=False)
             details_html += f'<p>結帳金額: {total_amount}</p>'
             # Fetching order date
-            order_query = 'SELECT o_date FROM ORDER_M WHERE o_id = ? '
+            order_query = 'SELECT o_date FROM ORDER_M WHERE o_id = ?'
             order_date = pd.read_sql_query(order_query, conn, params=(o_id,)).iloc[0, 0]
             current_order_details = {'order_id': o_id, 'order_date': order_date, 'details': df, 'total_amount': total_amount}
             emit('order_details', {'details': details_html, 'order_id': o_id, 'order_date': order_date})
@@ -322,7 +312,7 @@ if __name__ == '__main__':
     print(f" query_data 共讀取 {len(class_product_tbl)} 筆資料")
     print(class_product_tbl)
     
-    http_server = WSGIServer(('0.0.0.0', 5000), socketio.run(app, debug=True, host='0.0.0.0', port=3000))
+    http_server = WSGIServer(('0.0.0.0', 5000), socketio.run(app, debug=True, host='127.0.0.1', port=3000))
     http_server.serve_forever()
     
  
