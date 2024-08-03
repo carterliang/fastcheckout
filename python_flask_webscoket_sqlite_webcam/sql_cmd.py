@@ -2,9 +2,7 @@
 """
 Created on Wed Oct  4 12:02:55 2023
 
-@author: joseph@艾鍗學院
 
-PRAGMA table_info(member)
 
 """
 ### Create table ########
