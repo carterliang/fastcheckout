@@ -183,7 +183,10 @@
                 });
                 console.log(items);  // 控制台打印，以便調試
                 socket.emit('checkout_event', {items: items});
-                setTimeout("location.href='http://localhost:3000/'",1000);
+                setTimeout("location.href='/'",1000);
+                //setTimeout("location.href='http://172.20.10.9:3000/'",1000);
+           
+                
             } 
         });
 
